@@ -6,7 +6,7 @@ dependencies {
     implementation project(":w-back-core:core-enum")
     implementation project(':w-back-core:core-config')
     implementation project(':w-back-core:core-util')
-//    implementation project(":support:monitoring")
+    implementation project(":support:monitoring")
     implementation project(":support:logging")
     implementation project(":storage:db")
 //    implementation project(":clients:client-example")

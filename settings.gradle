@@ -24,4 +24,5 @@ include(
 include(
     ':support',
     ':support:logging',
+    ':support:monitoring'
 )
