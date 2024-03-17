@@ -1,0 +1,22 @@
+// 실행해야 하는 서버이기 때문에 Bootjar는 True, Jar는 False설정
+bootJar.enabled = true
+jar.enabled = false
+
+dependencies {
+    implementation project(":w-back-core:core-enum")
+    implementation project(':w-back-core:core-config')
+    implementation project(':w-back-core:core-util')
+//    implementation project(":support:monitoring")
+//    implementation project(":support:logging")
+//    implementation project(":storage:db-core")
+//    implementation project(":clients:client-example")
+//    testImplementation project(":tests:api-docs")
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Message Yml
+    implementation 'dev.akkinoc.util:yaml-resource-bundle:2.12.1'
+}

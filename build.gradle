@@ -1,0 +1,79 @@
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' apply(false)
+    id 'io.spring.dependency-management'
+    id 'io.spring.javaformat' apply(false)
+    id 'org.asciidoctor.jvm.convert' apply(false)
+}
+
+apply from: 'lint.gradle'
+
+allprojects {
+    group = "${projectGroup}"
+    version = "${applicationVersion}"
+    sourceCompatibility = project.javaVersion
+
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+}
+
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.asciidoctor.jvm.convert'
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudDependenciesVersion}"
+        }
+    }
+
+    // Default로 JAR파일 생성 차단
+    bootJar.enabled = false
+    jar.enabled = true
+
+    dependencies {
+        // Lombok
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+        // JUnit5
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+
+
+// sonarqube 설정 (나중에 쓸 생각있을수 있으니 ㅎ;
+//sonarqube {
+//    properties {
+//        property 'sonar.projectKey', 'example'
+//        property 'sonar.organization', 'example'
+//        property 'sonar.host.url', 'https://sonarcloud.io'
+//        property 'sonar.sources', 'src'
+//        property 'sonar.language', 'java'
+//        property 'sonar.sourceEncoding', 'UTF-8'
+//        property 'sonar.test.inclusions', '**/*Test.java'
+//        property 'sonar.exclusions', '**/test/**, **/Q*.java, **/*Doc*.java, **/resources/** ,**/*Application*.java , **/*Config*.java,' +
+//                '**/*Dto*.java, **/*Request*.java, **/*Response*.java ,**/*Exception*.java ,**/*ErrorCode*.java'
+//        property 'sonar.java.coveragePlugin', 'jacoco'
+//    }
+//}
