@@ -1,0 +1,103 @@
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.default_batch_fetch_size: 100
+
+mybatis:
+  # mappers 하위 모든 xml을 모두 Read한다
+  mapper-locations: classpath:/mappers/**/*.xml
+  # waiting.storage.db.domain 패키지 내부의 모든 클래스를 Alias한다.
+  type-aliases-package: waiting.storage.db.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+
+---
+spring.config.activate.on-profile: local
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+storage:
+  datasource:
+    core:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:waiting;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      pool-name: waiting-db-pool
+      data-source-properties:
+        rewriteBatchedStatements: true
+
+---
+spring.config.activate.on-profile: dev
+
+storage:
+  datasource:
+    core:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # java -jar -Dstorage.database.core-db-url=192.168.0.1:4040 이런식으로 주입하면 됨.
+      jdbc-url: jdbc:mysql://${storage.database.core-db.url}
+      username: ${storage.database.core-db.username}
+      password: ${storage.database.core-db.password}
+      maximum-pool-size: 5
+      connection-timeout: 1100
+      keepalive-time: 30000
+      validation-timeout: 1000
+      max-lifetime: 600000
+      pool-name: waiting-db-pool
+      data-source-properties:
+        socketTimeout: 3000
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+
+---
+spring.config.activate.on-profile: prod
+
+storage:
+  datasource:
+    core:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://${storage.database.core-db.url}
+      username: ${storage.database.core-db.username}
+      password: ${storage.database.core-db.password}
+      maximum-pool-size: 25
+      connection-timeout: 1100
+      keepalive-time: 30000
+      validation-timeout: 1000
+      max-lifetime: 600000
+      pool-name: waiting-db-pool
+      data-source-properties:
+        socketTimeout: 3000
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false

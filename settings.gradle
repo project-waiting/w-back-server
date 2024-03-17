@@ -17,3 +17,7 @@ include (
     ':w-back-core:core-config',
     ':w-back-core:core-util'
 )
+include(
+    ':storage',
+    ':storage:db'
+)

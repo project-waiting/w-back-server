@@ -1,0 +1,22 @@
+dependencies {
+    implementation project(':w-back-core:core-enum')
+    implementation project(':w-back-core:core-util')
+
+    // MyBatis
+    api 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
+
+    // JPA
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //QueryDsl
+    api 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+    // Validation
+    api 'org.springframework.boot:spring-boot-starter-validation'
+
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+}
