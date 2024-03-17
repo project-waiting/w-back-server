@@ -1,0 +1,5 @@
+dependencies {
+    // Sentry 사용안하니 ㅎ;;
+//    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+//    implementation "io.sentry:sentry-logback:${property("sentryVersion")}"
+}

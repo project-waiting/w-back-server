@@ -21,3 +21,7 @@ include(
     ':storage',
     ':storage:db'
 )
+include(
+    ':support',
+    ':support:logging',
+)

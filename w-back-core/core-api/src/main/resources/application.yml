@@ -6,7 +6,7 @@ spring:
     import:
       - database.yml
 #      - monitoring.yml
-#      - logging.yml
+      - logging.yml
 #      - client-example.yml
 
 server:
