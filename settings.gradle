@@ -26,3 +26,7 @@ include(
     ':support:logging',
     ':support:monitoring'
 )
+include(
+    ':clients',
+    ':clients:client-example'
+)

@@ -7,7 +7,7 @@ spring:
       - database.yml
       - monitoring.yml
       - logging.yml
-#      - client-example.yml
+      - client-example.yml
 
 server:
   shutdown: graceful

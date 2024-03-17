@@ -9,8 +9,7 @@ dependencies {
     implementation project(":support:monitoring")
     implementation project(":support:logging")
     implementation project(":storage:db")
-//    implementation project(":clients:client-example")
-//    testImplementation project(":tests:api-docs")
+    implementation project(":clients:client-example")
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
